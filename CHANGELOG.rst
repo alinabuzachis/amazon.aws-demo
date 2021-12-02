@@ -5,6 +5,24 @@ community.aws Release Notes
 .. contents:: Topics
 
 
+v3.0.0
+======
+
+Major Changes
+-------------
+
+- amazon.aws collection - The amazon.aws collection has dropped support for ``botocore<1.19.0`` and ``boto3<1.16.0``. Most modules will continue to work with older versions of the AWS SDK, however compatability with older versions of the SDK is not guaranteed and will not be tested. When using older versions of the SDK a warning will be emitted by Ansible (https://github.com/ansible-collections/amazon.aws/pull/574).
+
+Minor Changes
+-------------
+
+- ec2_instance - add count parameter support (https://github.com/ansible-collections/amazon.aws/pull/539).
+
+Deprecated Features
+-------------------
+
+- module_utils - support for the original AWS SDK `boto` has been deprecated in favour of the `boto3`/`botocore` SDK. All `boto` based modules have either been deprecated or migrated to `botocore`, and the remaining support code in module_utils will be removed in release 4.0.0 of the amazon.aws collection. Any modules outside of the amazon.aws and community.aws collections based on the `boto` library will need to be migrated to the `boto3`/`botocore` libraries (https://github.com/ansible-collections/amazon.aws/pull/575).
+
 v2.1.0
 ======
 
