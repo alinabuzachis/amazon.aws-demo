@@ -45,6 +45,7 @@ def get_rds_method_attribute(method_name, module):
             waiter = 'cluster_deleted'
         else:
             waiter = 'cluster_available'
+        # just a change
     elif method_name in instance_method_names and 'new_db_instance_identifier' in module.params:
         cluster = False
         instance = True
