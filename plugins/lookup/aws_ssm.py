@@ -1,7 +1,6 @@
 # (c) 2016, Bill Wang <ozbillwang(at)gmail.com>
 # (c) 2017, Marat Bakeev <hawara(at)gmail.com>
 # (c) 2018, Michael De La Rue <siblemitcom.mddlr(at)spamgourmet.com>
-# (c) 2022, Geoffrey Gouez <cicatrice(at)cicatrice.eu>
 # (c) 2017 Ansible Project
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
