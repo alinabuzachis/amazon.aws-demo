@@ -72,8 +72,9 @@ options:
     choices: ['error', 'skip', 'warn']
     version_added: 2.0.0
   endpoint:
-    description: Use a custom endpoint when connecting to SSM service
+    description: Use a custom endpoint when connecting to SSM service.
     type: string
+    version_added: 3.2.0
 '''
 
 EXAMPLES = '''

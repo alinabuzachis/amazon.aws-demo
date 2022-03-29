@@ -1,0 +1,2 @@
+minor_changes:
+  - aws_ssm - support ``endpoint`` parameter, as well of tradional environment variable for client configuration (AWS_PROFILE, AWS_ACCESS_KEY_ID, ...). (https://github.com/ansible-collections/amazon.aws/pull/623).
