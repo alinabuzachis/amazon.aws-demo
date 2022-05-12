@@ -14,11 +14,12 @@
         object: "{{ obj }}"
       with_items: "{{ objects.s3_keys }}"
       loop_control:
-        loop_var: obj      
+        loop_var: obj
+      when: "'s3_keys' in objects"    
       ignore_errors: true
 
     - name: delete the bucket
       aws_s3:
         bucket: "{{ item }}"
         mode: delete
-      ignore_errors: yes
+      ignore_errors: true

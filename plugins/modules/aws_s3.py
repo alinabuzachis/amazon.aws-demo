@@ -109,7 +109,7 @@ options:
         The ETag may or may not be an MD5 digest of the object data. See the ETag response header here
         U(https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonResponseHeaders.html).
       - (C(GET) mode only) When this is set to C(latest) the last modified timestamp of local file is compared with the 'LastModified' of the object/key in S3.
-    default: 'always'
+    default: 'different'
     aliases: ['force']
     type: str
   retries:
@@ -208,7 +208,7 @@ options:
 author:
     - "Lester Wade (@lwade)"
     - "Sloane Hertel (@s-hertel)"
-    - "Alina Buzachis (@linabuzachis)"
+    - "Alina Buzachis (@alinabuzachis)"
 extends_documentation_fragment:
 - amazon.aws.aws
 - amazon.aws.ec2
@@ -922,7 +922,7 @@ def main():
         object=dict(),
         permission=dict(type='list', elements='str', default=['private']),
         version=dict(default=None),
-        overwrite=dict(aliases=['force'], default='always'),
+        overwrite=dict(aliases=['force'], default='different'),
         prefix=dict(default=""),
         retries=dict(aliases=['retry'], type='int', default=0),
         s3_url=dict(aliases=['S3_URL']),
@@ -979,7 +979,8 @@ def main():
 
     if overwrite not in ['always', 'never', 'different', 'latest']:
         if module.boolean(overwrite):
-            overwrite = 'always'
+            # Fall to default configuration
+            overwrite = 'different'
         else:
             overwrite = 'never'
 
