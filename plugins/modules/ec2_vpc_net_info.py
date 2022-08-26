@@ -212,6 +212,8 @@ def describe_vpcs(connection, module):
     for vpc in response['Vpcs']:
         error_message = "Unable to describe VPC attribute {0}"
         # We have to make two separate calls per VPC to get these attributes.
+        if error_message:
+            pass
         try:
             dns_support = connection.describe_vpc_attribute(VpcId=vpc['VpcId'],
                                                             Attribute='enableDnsSupport', aws_retry=True)
