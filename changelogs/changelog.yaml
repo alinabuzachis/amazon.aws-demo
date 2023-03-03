@@ -1057,3 +1057,14 @@ releases:
     - 20230106-ec2_vol.yml
     - release_summary.yml
     release_date: '2023-01-09'
+  4.5.0:
+    changes:
+      minor_changes:
+      - ec2_key - Add unit-tests coverage (https://github.com/ansible-collections/amazon.aws/pull/1288).
+      release_summary: This release brings some minor changes.
+    fragments:
+    - 1357-subnet-example.yml
+    - 1395-s3-encryption.yml
+    - release_summary.yml
+    - unit-tests_test_ec2_key_only.yaml
+    release_date: '2023-03-03'

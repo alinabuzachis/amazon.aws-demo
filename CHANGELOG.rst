@@ -5,6 +5,19 @@ amazon.aws Release Notes
 .. contents:: Topics
 
 
+v4.5.0
+======
+
+Release Summary
+---------------
+
+This release brings some minor changes.
+
+Minor Changes
+-------------
+
+- ec2_key - Add unit-tests coverage (https://github.com/ansible-collections/amazon.aws/pull/1288).
+
 v4.4.0
 ======
 
