@@ -1,4 +1,4 @@
-name: Integration
+name: Lightspeed
 
 on: [push, pull_request]
 jobs:
@@ -15,7 +15,7 @@ jobs:
         run:
           pip install git+https://github.com/goneri/lightspeed-photon
 
-      - name: Run integration tests
+      - name: Run lightspeed-photon
         run: lightspeed-photon tests/photon/ --debug
         env:
           LIGHTSPEED_TOKEN: ${{ secrets.SECRET_TOKEN }}
