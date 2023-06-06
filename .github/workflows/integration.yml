@@ -2,7 +2,7 @@ name: Integration
 
 on: [push, pull_request]
 jobs:
-  ruff:
+  lightspeed:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,4 +16,6 @@ jobs:
           pip install git+https://github.com/goneri/lightspeed-photon
 
       - name: Run integration tests
-        run: LIGHTSPEED_TOKEN=${{ secrets.SECRET_TOKEN }} lightspeed-photon samples/cloud/test_aws.yaml
+        run: lightspeed-photon tests/photon/ --debug
+        env:
+          LIGHTSPEED_TOKEN: ${{ secrets.SECRET_TOKEN }}
