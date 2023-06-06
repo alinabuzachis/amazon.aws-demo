@@ -1,0 +1,19 @@
+name: Integration
+
+on: [push, pull_request]
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install lightspeed-photon
+        run:
+          pip install git+https://github.com/goneri/lightspeed-photon
+
+      - name: Run integration tests
+        run: LIGHTSPEED_TOKEN=${{ secrets.SECRET_TOKEN }} lightspeed-photon samples/cloud/test_aws.yaml
