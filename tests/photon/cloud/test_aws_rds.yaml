@@ -1,0 +1,208 @@
+---
+- name: create_an_aws_rds_instance_without_context
+  prompt: create a new AWS RDS instance called foo
+  accepted_answers:
+    - module: amazon.aws.rds_instance
+      module_called_with:
+        - id: foo
+        - state: present
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+    - module: rds_instance
+      module_called_with:
+        - id: foo
+        - state: present
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+
+- name: create_an_aws_rds_instance_with_context
+  prompt: "    - name: create a new AWS RDS instance called foo"
+  context_from_file: context/aws_rds_context.yaml
+  accepted_answers:
+    - module: amazon.aws.rds_instance
+      module_called_with:
+        - id: foo
+        - state: present
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+    - module: rds_instance
+      module_called_with:
+        - id: foo
+        - state: present
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+
+- name: add_additional_sg_to_an_aws_rds_instance_with_context
+  prompt: "    - name: add a new security without purge to an RDS instance called foo"
+  context_from_file: context/aws_rds_context.yaml
+  accepted_answers:
+    - module: amazon.aws.rds_instance
+      module_called_with:
+        - id: foo
+        - state: present
+        - purge_security_groups: false
+        - vpc_security_group_ids
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+    - module: rds_instance
+      module_called_with:
+        - id: foo
+        - state: present
+        - purge_security_groups: false
+        - vpc_security_group_ids
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+
+- name: create_an_aws_rds_subnet_group
+  prompt: create a new AWS RDS subnet group called bar
+  accepted_answers:
+    - module: amazon.aws.rds_subnet_group
+      module_called_with:
+        - name: bar
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+    - module: rds_subnet_group
+      module_called_with:
+        - name: bar
+        - state: present
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+
+- name: create_an_aws_rds_cluster
+  prompt: create a new AWS RDS cluster called foo_bar
+  accepted_answers:
+    - module: amazon.aws.rds_cluster
+      module_called_with:
+        - id: foo_bar
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+    - module: rds_cluster
+      module_called_with:
+        - id: foo_bar
+        - state: present
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+
+- name: create_an_aws_rds_option_group_without_context
+  prompt: create a new AWS RDS option group called FooBar
+  accepted_answers:
+    - module: amazon.aws.rds_option_group
+      module_called_with:
+        - option_group_name: FooBar
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+    - module: rds_option_group
+      module_called_with:
+        - option_group_name: FooBar
+        - state: present
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+
+- name: create_an_aws_rds_option_group_with_context
+  prompt: create a new AWS RDS option group called FooBar
+  accepted_answers:
+    - module: amazon.aws.rds_option_group
+      module_called_with:
+        - option_group_name: FooBar
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+    - module: rds_option_group
+      module_called_with:
+        - option_group_name: FooBar
+        - state: present
+      module_not_called_with:
+        - state: absent
+      task_uses_loop: false
+      task_uses_become: false
+
+- name: create_an_rds_read_reaplica
+  prompt: create an AWS RDS read replica called foo_replica in region us-east-2
+  accepted_answers:
+  - module: amazon.aws.rds_instance
+    module_called_with:
+      - id: foo_replica
+      - state: present
+      - read_replica: true
+      - region: us-east-2
+      - source_db_instance_identifier
+    module_not_called_with:
+      - state: absent
+    task_uses_loop: false
+    task_uses_become: false
+  - module: rds_instance
+    module_called_with:
+      - id: foo_replica
+      - state: present
+      - read_replica: true
+      - region: us-east-2
+      - source_db_instance_identifier
+    module_not_called_with:
+        - state: absent
+    task_uses_loop: false
+    task_uses_become: false
+
+- name: delete_an_rds_instance
+  prompt: delete an AWS RDS instance called foo and skip creating a final snapshot
+  accepted_answers:
+  - module: amazon.aws.rds_instance
+    module_called_with:
+      - id: foo
+      - state: absent
+      - skip_final_snapshot: true
+    module_not_called_with:
+      - state: present
+    task_uses_loop: false
+    task_uses_become: false
+  - module: rds_instance
+    module_called_with:
+      - id: foo
+      - state: absent
+      - skip_final_snapshot: true
+    module_not_called_with:
+      - state: present
+    task_uses_loop: false
+    task_uses_become: false
+
+- name: snapshot_an_rds_instance
+  prompt: Create snapshot of an AWS RDS instance
+  accepted_answers:
+  - module: amazon.aws.rds_instance_snapshot
+    module_called_with:
+      - state: present
+    module_not_called_with:
+      - state: absent
+    task_uses_loop: false
+    task_uses_become: false
+  - module: rds_instance_snapshot
+    module_called_with:
+      - state: present
+    module_not_called_with:
+      - state: absent
+    task_uses_loop: false
+    task_uses_become: false

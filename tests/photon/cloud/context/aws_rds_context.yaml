@@ -1,0 +1,44 @@
+---
+- name: AWS RDS
+  hosts: localhost
+  connection: local
+
+  vars:
+    cidr_block: "10.122.122.128/26"
+  tasks:
+    - name: Create a vpc called myvpc
+      amazon.aws.ec2_vpc_net:
+        name: "myvpc"
+        region: "us-east-1"
+        cidr_block: "{{ cidr_block }}"
+        tags:
+          Description: Created by ansible
+          Name: "myvpc"
+      register: myvpc
+
+    - name: Create several subnets
+      amazon.aws.ec2_vpc_subnet:
+        cidr: '{{ item.cidr }}'
+        az: '{{ item.zone }}'
+        vpc_id: '{{ vpc_result.vpc.id }}'
+        tags:
+          Name: '{{ resource_prefix }}-subnet'
+          Description: created by rds_instance integration tests
+        state: present
+      register: subnets_result
+      loop:
+        - {cidr: 10.122.122.128/28, zone: 'us-east-1a'}
+        - {cidr: 10.122.122.144/28, zone: 'us-east-1b'}
+        - {cidr: 10.122.122.160/28, zone: 'us-east-1c'}
+
+
+    - name: Create several security groups
+      amazon.aws.ec2_security_group:
+        name: '{{ item }}'
+        description: created by rds_instance integration tests
+        state: present
+      register: sgs_result
+      loop:
+        - 'sg-1'
+        - 'sg-2'
+        - 'sg-3'
